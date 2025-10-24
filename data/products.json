@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "nombre": "Café Espresso",
+        "precio": 1500,
+        "imagen": "img/cafe1.jpg"
+    },
+    {
+        "id": 2,
+        "nombre": "Capuccino",
+        "precio": 1800,
+        "imagen": "img/cafe2.jpg"
+    },
+    {
+        "id": 3,
+        "nombre": "Latte Vainilla",
+        "precio": 2000,
+        "imagen": "img/cafe3.jpg"
+    },
+    {
+        "id": 4,
+        "nombre": "Brownie de Chocolate",
+        "precio": 1200,
+        "imagen": "img/brownie.jpg"
+    }
+]

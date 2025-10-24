@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> 
+    <meta name="keywords" content="cafetería, café, postres, bebidas">
+    <meta name="author" content="Kevin Zamora">
+    <title>Aromaz</title>
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Wonder Café</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#menu">Menú</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    
+
+    <section id="inicio" class="hero">
+        <h2>Bienvenido a Wonder Café</h2>
+        <p>El mejor aroma, el mejor sabor, el mejor momento.</p>
+    </section>
+
+    <section id="menu" class="menu-section">
+        <h2>Nuestro Menú</h2>
+        <div id="menu-container" class="menu-grid"></div>
+    </section>
+
+    <section id="contact" class="py-12 bg-amber-50 text-center">
+        <h2 class="text-3xl font-bold text-amber-800 mb-6">Contáctenos</h2>
+        <form class="max-w-md mx-auto bg-white shadow-md rounded-lg p-6">
+            <div class="mb-4">
+            <input type="text" placeholder="Nombre" required
+                    class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-600">
+            </div>
+            <div class="mb-4">
+            <input type="email" placeholder="Correo electrónico" required
+                    class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-600">
+            </div>
+            <div class="mb-4">
+            <textarea placeholder="Mensaje" required rows="4"
+                        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-600"></textarea>
+            </div>
+            <button type="submit"
+                    class="bg-amber-700 text-white px-6 py-2 rounded hover:bg-amber-800 transition">
+            Enviar mensaje
+            </button>
+        </form>
+    </section>
+
+
+    <footer>
+        <p>&copy; 2025 Wonder Café | Creado por Kevin Zamora</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

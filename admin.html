@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <meta name="keywords" content="admin, panel, usuario">
+    <meta name="author" content="Kevin Zamora">
+    <title>Panel de Administración</title>
+    <link rel="stylesheet" href="css/estilo.css">
+</html>
+<script>
+const user = localStorage.getItem("usuarioActivo");
+if (!user) {
+  alert("Acceso no autorizado. Inicie sesión primero.");
+  window.location.href = "login.html";
+}
+</script>
+
+
+<button id="logout">Cerrar sesión</button>
+
+<script>
+document.getElementById("logout").addEventListener("click", () => {
+  localStorage.removeItem("usuarioActivo");
+  window.location.href = "login.html";
+});
+</script>
