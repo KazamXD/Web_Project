@@ -1,51 +1,54 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <meta name="description" content="Login">
-    <meta name="keywords" content="registro, login, formulario">
-    <meta name="author" content="Kevin Zamora">
-    <link href="css/estilo.css" rel="stylesheet" />
-    <title>Login</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <title>Login | Cafetería</title>
 </head>
+<body class="bg-[#fffdf8] text-[#333] font-sans min-h-screen flex items-center justify-center">
 
-<body>
-    <div class="contenedor">
-      <!-- Radios invisibles para controlar el formulario -->
-      <input type="radio" name="opcion" id="login" >
-      <input type="radio" name="opcion" id="registro" checked>
-
-      <!-- Botones que actúan como etiquetas -->
-      <div class="botones">
-        <label for="registro">Registrarse</label>
-        <label for="login">Iniciar sesión</label>       
-      </div>
-
-      <!-- Formularios -->
-      <div class="formulario form-registro">
-        <h2>Registro Gratis</h2>
-        <form>
-          <div class="nombre-apellido">
-            <input type="text" placeholder="Nombre*">
-            <input type="text" placeholder="Apellido*">  
-          </div>
-          <input type="email" placeholder="Correo*">
-          <input type="text" placeholder="Usuario*">
-          <input type="password" placeholder="Contraseña*">
-          <button type="submit">Crear cuenta</button>
-        </form>
-      </div>
-      <div class="formulario form-login">
-        <h2>Bienvenido</h2>
-        <form>
-          <input type="text" placeholder="Usuario*">
-          <input type="password" placeholder="Contraseña*">
-          <h3>Olvidó la Contraseña?</h3>
-          <button type="submit">Entrar</button>
-        </form>
-      </div>
+  <div class="bg-white/80 backdrop-blur-sm shadow-lg rounded-2xl p-8 w-full max-w-md border border-[#e0d7c6]">
+    
+    <!-- Toggle botones -->
+    <div class="flex justify-around mb-6">
+      <label for="registro" class="cursor-pointer text-[#4e342e] font-semibold hover:underline" id="label-registro">Registrarse</label>
+      <label for="login" class="cursor-pointer text-[#4e342e]/70 hover:text-[#4e342e] font-semibold" id="label-login">Iniciar sesión</label>
     </div>
+
+    <!-- Radios invisibles -->
+    <input type="radio" name="opcion" id="login" class="hidden">
+    <input type="radio" name="opcion" id="registro" class="hidden" checked>
+
+    <!-- Formulario de registro -->
+    <div class="form-registro space-y-4" id="formRegistro">
+      <h2 class="text-2xl font-bold text-center text-[#4e342e]">Registro Gratis</h2>
+      <form class="flex flex-col space-y-3">
+        <div class="flex gap-3">
+          <input type="text" placeholder="Nombre*" class="w-1/2 border border-[#d4c9b9] rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#4e342e]/50 focus:outline-none">
+          <input type="text" placeholder="Apellido*" class="w-1/2 border border-[#d4c9b9] rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#4e342e]/50 focus:outline-none">
+        </div>
+        <input type="email" placeholder="Correo*" class="border border-[#d4c9b9] rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#4e342e]/50 focus:outline-none">
+        <input type="text" placeholder="Usuario*" class="border border-[#d4c9b9] rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#4e342e]/50 focus:outline-none">
+        <input type="password" placeholder="Contraseña*" class="border border-[#d4c9b9] rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#4e342e]/50 focus:outline-none">
+        <button type="submit" class="bg-[#4e342e] text-white rounded-lg py-2 hover:bg-[#3c2722] transition">Crear cuenta</button>
+      </form>
+    </div>
+
+    <!-- Formulario de login -->
+    <div class="form-login hidden space-y-4" id="formLogin">
+      <h2 class="text-2xl font-bold text-center text-[#4e342e]">Bienvenido</h2>
+      <form class="flex flex-col space-y-3">
+        <input type="text" placeholder="Usuario*" class="border border-[#d4c9b9] rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#4e342e]/50 focus:outline-none">
+        <input type="password" placeholder="Contraseña*" class="border border-[#d4c9b9] rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#4e342e]/50 focus:outline-none">
+        <h3 class="text-sm text-right text-[#4e342e]/80 hover:text-[#4e342e] cursor-pointer">¿Olvidó la contraseña?</h3>
+        <button type="submit" class="bg-[#4e342e] text-white rounded-lg py-2 hover:bg-[#3c2722] transition">Entrar</button>
+      </form>
+    </div>
+
+  </div>
+
+  <script src= "js/login.js"></script>
+
 </body>
 </html>

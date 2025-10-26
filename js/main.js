@@ -26,30 +26,45 @@ async function cargarMenu() {
 cargarMenu();
 
 // Manejo del formulario de contacto
-document.querySelector("form").addEventListener("submit", e => {
-  e.preventDefault();
-  alert("¡Gracias por contactarnos! Te responderemos pronto ☕");
-  e.target.reset();
-});
+const form = document.querySelector("form");
+if (form) {
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    alert("¡Gracias por contactarnos! Te responderemos pronto ☕");
+    e.target.reset();
+  });
+}
 
 // Rotador automático de imágenes tipo slider
 function rotateImages() {
-    const slides = document.querySelectorAll('.slide');
-    if (slides.length === 0) return;
 
-    let current = 0;
 
-    setInterval(() => {
-    slides[current].classList.remove('opacity-100', 'active');
-    slides[current].classList.add('opacity-0');
+  const slides = document.querySelectorAll('.slide');
+  if (slides.length === 0) return;
+
+  let current = 0;
+
+  setInterval(() => {
+    slides[current].classList.remove('active');
 
     current = (current + 1) % slides.length;
 
-    slides[current].classList.remove('opacity-0');
-    slides[current].classList.add('opacity-100', 'active');
-    }, 2500); // esto cambia la imagen cada 2,5 segundos, tipo el pirata jkanime
-
-
+    slides[current].classList.add('active');
+  }, 4000);
 }
 
 rotateImages();
+
+// Boton de perfil de usuario, cambia de registrarse/entrar a nombre de usuario si hay usuario activo
+const userLink = document.getElementById("user-link");
+const usuario = localStorage.getItem("usuarioActivo");
+
+if (userLink) {
+  if (usuario) {
+    userLink.textContent = "Perfil";
+    userLink.href = "profile.html";
+  } else {
+    userLink.textContent = "Registrarse/Entrar";
+    userLink.href = "login.html";
+  }
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <title>Perfil de Usuario</title>
+</head>
+<body class="bg-[#fffdf8] text-[#333] font-sans min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="bg-[#4e342e] text-white p-4 flex justify-between items-center">
+    <h1 class="text-xl font-bold">Cafetería</h1>
+    <nav>
+      <a href="index.html" class="mr-4 hover:underline">Inicio</a>
+      <a href="profile.html" class="hover:underline">Mi perfil</a>
+      <button id="logout" class="ml-4 bg-white text-[#4e342e] px-3 py-1 rounded hover:bg-[#d7ccc8]">
+        Cerrar sesión
+      </button>
+    </nav>
+  </header>
+
+  <!-- Contenido del perfil -->
+  <main class="flex-grow flex justify-center items-center p-6">
+    <div id="perfil-contenido" class="bg-white/80 backdrop-blur-sm shadow-lg rounded-2xl p-8 w-full max-w-lg border border-[#e0d7c6] text-center hidden">
+      <img src="img/avatar.png" alt="Avatar del usuario" class="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-[#4e342e] object-cover">
+      <h2 id="nombre" class="text-2xl font-bold text-[#4e342e] mb-2"></h2>
+      <p class="text-[#4e342e]/80 mb-4">Usuario: <span id="usuario" class="font-semibold"></span></p>
+      <p class="mb-2">Correo: <span id="correo" class="font-semibold"></span></p>
+      <p class="mb-6">Miembro desde: <span id="fecha" class="font-semibold"></span></p>
+
+      <button class="bg-[#4e342e] text-white rounded-lg py-2 px-4 hover:bg-[#3c2722] transition">
+        Editar perfil
+      </button>
+    </div>
+
+    <!-- Si no hay sesión -->
+    <div id="sin-sesion" class="text-center hidden">
+      <h2 class="text-2xl font-bold text-[#4e342e] mb-4">No has iniciado sesión ☕</h2>
+      <a href="login.html" class="bg-[#4e342e] text-white px-4 py-2 rounded hover:bg-[#3c2722] transition">Ir a Login</a>
+    </div>
+  </main>
+
+  <footer class="bg-[#4e342e] text-white text-center py-3">
+    © 2025 aromaZ - Todos los derechos reservados
+  </footer>
+
+  <!-- Script del perfil -->
+  <script src="js/profile.js"></script>
+
+</body>
+</html>
