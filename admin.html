@@ -1,28 +1,53 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <meta name="keywords" content="admin, panel, usuario">
-    <meta name="author" content="Kevin Zamora">
-    <title>Panel de Administración</title>
-    <link rel="stylesheet" href="css/estilo.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <title>Panel de Administración</title>
+</head>
+<body class="bg-gray-100">
+  <header class="bg-[#4e342e] text-white p-4 flex justify-between items-center">
+    <h1 class="text-2xl font-bold">Panel de Administración</h1>
+    <button id="logout" class="bg-red-500 hover:bg-red-400 px-4 py-2 rounded">Cerrar sesión</button>
+  </header>
+
+  <main class="p-6">
+    <h2 class="text-xl font-semibold mb-4">Usuarios registrados</h2>
+    <table class="w-full bg-white shadow rounded-lg">
+      <thead class="bg-gray-200">
+        <tr>
+          <th class="p-3 text-left">Usuario</th>
+          <th class="p-3 text-left">Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-usuarios"></tbody>
+    </table>
+
+    <!-- Esto es para el dashboard -->
+    <h2 class="text-2xl font-semibold mb-4">Estadísticas</h2>
+
+    <div class="grid grid-cols-3 gap-4 mb-6">
+      <div class="bg-white shadow rounded p-4 text-center">
+        <h3 class="text-lg font-bold">Clientes Totales</h3>
+        <p id="clientes-total" class="text-3xl text-[#4e342e]">0</p>
+      </div>
+      <div class="bg-white shadow rounded p-4 text-center">
+        <h3 class="text-lg font-bold">Promedio por Día</h3>
+        <p id="clientes-promedio" class="text-3xl text-[#4e342e]">0</p>
+      </div>
+      <div class="bg-white shadow rounded p-4 text-center">
+        <h3 class="text-lg font-bold">Más Frecuente</h3>
+        <p id="cliente-frecuente" class="text-3xl text-[#4e342e]">---</p>
+      </div>
+    </div>
+
+    <h3 class="text-xl font-semibold mb-2">Ingresos por producto</h3>
+    <ul id="lista-ventas" class="list-disc pl-6"></ul>
+
+
+  </main>
+
+  <script src="js/admin.js"></script>
+</body>
 </html>
-<script>
-const user = localStorage.getItem("usuarioActivo");
-if (!user) {
-  alert("Acceso no autorizado. Inicie sesión primero.");
-  window.location.href = "login.html";
-}
-</script>
-
-
-<button id="logout">Cerrar sesión</button>
-
-<script>
-document.getElementById("logout").addEventListener("click", () => {
-  localStorage.removeItem("usuarioActivo");
-  window.location.href = "login.html";
-});
-</script>

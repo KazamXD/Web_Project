@@ -1,0 +1,13 @@
+{
+  "ventas": [
+    { "producto": "Capuchino", "ingresos": 1200 },
+    { "producto": "Latte", "ingresos": 950 },
+    { "producto": "Moka", "ingresos": 780 },
+    { "producto": "Cold Brew", "ingresos": 420 }
+  ],
+  "clientes": {
+    "total": 85,
+    "promedioPorDia": 12,
+    "masFrecuente": "Kevin Zamora"
+  }
+}

@@ -1,9 +1,26 @@
 [
-    {
-  "nombre": "Kevin",
-  "apellido": "Zamora",
-  "usuario": "kzamora",
-  "password": "cafe2025",
-  "correo": "kevin@example.com"
-}
+  {
+    "nombre": "Kevin",
+    "apellido": "Zamora",
+    "usuario": "KazamXD",
+    "password": "cafe2025",
+    "correo": "kevin@example.com",
+    "rol": "admin"
+  },
+  {
+    "nombre": "Rogal",
+    "apellido": "Dorn",
+    "correo": "dorn@gmail.com",
+    "usuario": "Dorn",
+    "password": "12345",
+    "rol": "cliente"
+  },
+  {
+    "nombre": "Valentina",
+    "apellido": "Tershkova",
+    "correo": "vteresh@gmail.com",
+    "usuario": "Teresh",
+    "password": "12345",
+    "rol": "cliente"
+  }
 ]

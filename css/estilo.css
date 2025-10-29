@@ -31,15 +31,6 @@ header a {
     text-decoration: none;
 }
 
-.hero {
-    text-align: center;
-    padding: 80px 20px;
-    background-image: url('../img/cafe_bg.jpg');
-    background-size: cover;
-    background-position: center;
-    color: white;
-}
-
 .menu-section {
     padding: 40px 20px;
     text-align: center;
@@ -52,6 +43,7 @@ header a {
     margin-top: 20px;
 }
 
+/* Productos */
 .producto {
     background-color: #fff;
     border-radius: 10px;
@@ -73,6 +65,8 @@ header a {
     margin: 10px 0 5px;
 }
 
+
+/* Pie de página */
 footer {
     background-color: #4e342e;
     color: white;
