@@ -1,3 +1,4 @@
+// Validación de sesión
 const user = JSON.parse(localStorage.getItem("usuarioActivo"));
 
 if (!user) {
@@ -8,57 +9,148 @@ if (!user) {
   window.location.href = "index.html";
 }
 
+console.log("usuarioActivo:", localStorage.getItem("usuarioActivo"));
+console.log("user obj:", user);
+
 // URL de tu servidor Node
 const SERVER_URL = "http://localhost:3000";
 
-// Leer el usuario activo del localStorage
-    const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
-    const perfil = document.getElementById("perfil-contenido");
-    const sinSesion = document.getElementById("sin-sesion");
+// Elementos del DOM
+const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
+const perfil = document.getElementById("perfil-contenido");
+const sinSesion = document.getElementById("sin-sesion");
 
-    if (usuario) {
-      // Mostrar el perfil
-      perfil.classList.remove("hidden");
-      document.getElementById("nombre").textContent = `${usuario.nombre} ${usuario.apellido}`;
-      document.getElementById("usuario").textContent = usuario.usuario;
-      document.getElementById("correo").textContent = usuario.correo;
-      document.getElementById("fecha").textContent = "Octubre 2025";
-    } else {
-      // Si no hay sesión activa
-      sinSesion.classList.remove("hidden");
-    }
+const logoutBtn = document.getElementById("logout");
+const eliminarBtn = document.getElementById("eliminar-perfil");
 
-    // Cerrar sesión
-    const logoutBtn = document.getElementById("logout");
-    logoutBtn.addEventListener("click", () => {
-      localStorage.removeItem("usuarioActivo");
-      window.location.href = "http://127.0.0.1:5500/Web_Project/index.html";
+// Campos de perfil
+const nombreInput = document.getElementById("nombre");
+const correoInput = document.getElementById("correo");
+const nombreText = document.getElementById("nombre-text");
+const correoText = document.getElementById("correo-text");
+const fechaText = document.getElementById("fecha");
+
+const editBtn = document.querySelector("button:not(#logout):not(#eliminar-perfil)");
+const saveBtn = document.getElementById("guardar-perfil");
+
+const avatarImg = document.getElementById("avatar-img");
+const avatarInput = document.getElementById("avatar-input");
+
+// Si el usuario ya tiene avatar guardado, cargarlo
+if (usuario.avatar) {
+  avatarImg.src = usuario.avatar;
+}
+
+// Mostrar datos del usuario
+if (usuario) {
+  perfil.classList.remove("hidden");
+
+  nombreText.textContent = usuario.nombre;
+  correoText.textContent = usuario.correo;
+  nombreInput.value = usuario.nombre;
+  correoInput.value = usuario.correo;
+  fechaText.textContent = "Octubre 2025";
+
+  document.getElementById("usuario").textContent = usuario.usuario;
+} else {
+  sinSesion.classList.remove("hidden");
+}
+
+// ---- EDITAR PERFIL ----
+editBtn.addEventListener("click", () => {
+  // Mostrar inputs, ocultar textos
+  nombreText.classList.add("hidden");
+  correoText.classList.add("hidden");
+
+  nombreInput.classList.remove("hidden");
+  correoInput.classList.remove("hidden");
+
+  editBtn.classList.add("hidden");
+  saveBtn.classList.remove("hidden");
+});
+
+// ---- GUARDAR PERFIL ----
+saveBtn.addEventListener("click", async () => {
+  const dataActualizada = {
+    ...usuario,
+    nombre: nombreInput.value,
+    correo: correoInput.value
+  };
+
+  // Evitar mandar avatar base64 en el PUT (causa 413)
+  const { avatar, ...sinAvatar } = dataActualizada;
+
+  try {
+    const res = await fetch(`${SERVER_URL}/usuarios`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(sinAvatar)
     });
 
-//Eliminar usuario
-const eliminarBtn = document.getElementById("eliminar-perfil");
-if (eliminarBtn) {
-  eliminarBtn.addEventListener("click", async () => {
-    const confirmar = confirm("¿Estás seguro de que quieres eliminar tu cuenta? Esta acción no se puede deshacer.");
-    if (!confirmar) return;
-
-    try {
-      const res = await fetch(`${SERVER_URL}/usuarios`, {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ usuario: usuario.usuario })
-
-      });
-
-      if (!res.ok) throw new Error("No se pudo eliminar el usuario");
-
-      alert("Cuenta eliminada correctamente");
-      localStorage.removeItem("usuarioActivo");
-      window.location.href = "http://127.0.0.1:5500/Web_Project/index.html";
-
-    } catch (err) {
-      alert(err.message);
-      console.error(err);
+    if (!res.ok) {
+      const text = await res.text(); // ver mensaje real
+      throw new Error(text || "No se pudo actualizar el perfil");
     }
-  });
-}
+
+    // Guardar localmente con avatar intacto
+    localStorage.setItem("usuarioActivo", JSON.stringify(dataActualizada));
+
+    alert("Perfil actualizado");
+    location.reload();
+
+  } catch (err) {
+    console.error("ERROR PUT /usuarios:", err);
+    alert("Error al actualizar: " + err.message);
+  }
+});
+
+
+// ---- CAMBIAR AVATAR ----
+avatarInput.addEventListener("change", () => {
+  const file = avatarInput.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    avatarImg.src = reader.result; // vista previa inmediata
+
+    // Guardar avatar en localStorage
+    const actualizado = { ...usuario, avatar: reader.result };
+    localStorage.setItem("usuarioActivo", JSON.stringify(actualizado));
+
+    alert("Avatar actualizado ✅");
+  };
+
+  reader.readAsDataURL(file); // convierte a base64
+});
+
+// ---- CERRAR SESIÓN ----
+logoutBtn.addEventListener("click", () => {
+  localStorage.removeItem("usuarioActivo");
+  window.location.href = "index.html";
+});
+
+// ---- ELIMINAR CUENTA ----
+eliminarBtn.addEventListener("click", async () => {
+  const confirmar = confirm("¿Seguro quieres eliminar tu cuenta?");
+
+  if (!confirmar) return;
+
+  try {
+    const res = await fetch(`${SERVER_URL}/usuarios`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ usuario: usuario.usuario })
+    });
+
+    if (!res.ok) throw new Error("No se pudo eliminar el usuario");
+
+    alert("Cuenta eliminada");
+    localStorage.removeItem("usuarioActivo");
+    window.location.href = "index.html";
+
+  } catch (err) {
+    console.error(err);
+    alert("Error al eliminar");
+  }
+});

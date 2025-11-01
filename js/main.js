@@ -30,14 +30,13 @@ const form = document.querySelector("form");
 if (form) {
   form.addEventListener("submit", e => {
     e.preventDefault();
-    alert("¡Gracias por contactarnos! Te responderemos pronto ☕");
+    alert("¡Gracias por contactarnos! Te responderemos pronto");
     e.target.reset();
   });
 }
 
 // Rotador automático de imágenes tipo slider
 function rotateImages() {
-
 
   const slides = document.querySelectorAll('.slide');
   if (slides.length === 0) return;

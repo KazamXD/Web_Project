@@ -23,14 +23,41 @@
   <!-- Contenido del perfil -->
   <main class="flex-grow flex justify-center items-center p-6">
     <div id="perfil-contenido" class="bg-white/80 backdrop-blur-sm shadow-lg rounded-2xl p-8 w-full max-w-lg border border-[#e0d7c6] text-center hidden">
-      <img src="img/avatar.png" alt="Avatar del usuario" class="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-[#4e342e] object-cover">
-      <h2 id="nombre" class="text-2xl font-bold text-[#4e342e] mb-2"></h2>
-      <p class="text-[#4e342e]/80 mb-4">Usuario: <span id="usuario" class="font-semibold"></span></p>
-      <p class="mb-2">Correo: <span id="correo" class="font-semibold"></span></p>
+      <img id="avatar-img" src="img/avatar.png" 
+     class="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-[#4e342e] object-cover">
+
+      <label for="avatar-input" class="cursor-pointer text-sm text-[#4e342e] underline block">
+        Cambiar avatar
+      </label>
+      <input id="avatar-input" type="file" accept="image/*" class="hidden">
+      
+      <!-- Nombre (editable) -->
+    <div class="mb-3">
+      <label class="text-sm font-medium text-[#4e342e]">Nombre</label>
+      <input id="nombre" class="w-full border rounded-lg p-2 mt-1 hidden" type="text">
+      <p id="nombre-text" class="text-2xl font-bold text-[#4e342e]"></p>
+    </div>
+
+    <!-- Usuario (no editable) -->
+    <div class="mb-3">
+      <label class="text-sm font-medium text-[#4e342e]">Usuario</label>
+      <p id="usuario" class="font-semibold"></p>
+    </div>
+
+    <!-- Correo (editable)-->
+    <div class="mb-3">
+      <label class="text-sm font-medium text-[#4e342e]">Correo</label>
+      <input id="correo" class="w-full border rounded-lg p-2 mt-1 hidden" type="email">
+      <p id="correo-text" class="font-semibold"></p>
+    </div>
       <p class="mb-6">Miembro desde: <span id="fecha" class="font-semibold"></span></p>
 
       <button class="bg-[#4e342e] text-white rounded-lg py-2 w-52 hover:bg-[#3c2722] transition">
         Editar perfil
+      </button>
+
+      <button id="guardar-perfil" class="bg-green-600 text-white rounded-lg py-2 w-52 hover:bg-green-700 transition mt-2 hidden">
+        Guardar cambios
       </button>
 
       <button id="eliminar-perfil" class="bg-red-600 text-white rounded-lg py-2 w-52 hover:bg-red-700 transition mt-4">
