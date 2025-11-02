@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <title>Administrar Productos</title>
+</head>
+
+<body class="bg-gray-100">
+
+<header class="bg-[#4e342e] text-white p-4 flex justify-between items-center">
+  <h1 class="text-2xl font-bold">Administrar Productos</h1>
+  <a href="admin.html" class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded">Volver</a>
+</header>
+
+<main class="p-6">
+
+  <!-- Formulario -->
+  <section class="bg-white p-4 rounded shadow mb-6">
+    <h2 class="text-xl font-semibold mb-4">Agregar / Editar Producto</h2>
+
+    <form id="formProducto" class="grid grid-cols-2 gap-4">
+      <input type="hidden" id="idProducto">
+
+      <div>
+        <label class="block font-semibold">Nombre:</label>
+        <input id="nombre" class="w-full p-2 border rounded" required>
+      </div>
+
+      <div>
+        <label class="block font-semibold">Precio ₡:</label>
+        <input id="precio" type="number" min="1" class="w-full p-2 border rounded" required>
+      </div>
+
+      <div class="col-span-2">
+        <label class="block font-semibold">Imagen (URL):</label>
+        <input id="imagen" class="w-full p-2 border rounded">
+      </div>
+
+      <button class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded col-span-2" type="submit">
+        Guardar Producto
+      </button>
+    </form>
+  </section>
+
+  <!-- Lista -->
+  <section>
+    <h2 class="text-xl font-semibold mb-4">Productos registrados</h2>
+    <table class="w-full bg-white shadow rounded-lg">
+      <thead class="bg-gray-200">
+        <tr>
+          <th class="p-3 text-left">Producto</th>
+          <th class="p-3 text-left">Precio</th>
+          <th class="p-3 text-left">Imagen</th>
+          <th class="p-3 text-left">Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-productos"></tbody>
+    </table>
+  </section>
+
+</main>
+
+<script type="module" src="js/add_products.js"></script>
+</body>
+</html>

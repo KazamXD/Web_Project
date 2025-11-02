@@ -6,8 +6,8 @@
     { "producto": "Cold Brew", "ingresos": 420 }
   ],
   "clientes": {
-    "total": 85,
-    "promedioPorDia": 12,
-    "masFrecuente": "Kevin Zamora"
+    "total": 97,
+    "promedioPorDia": 19,
+    "masFrecuente": "Kevin"
   }
 }

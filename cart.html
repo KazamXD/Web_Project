@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Carrito</title>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="p-6 bg-gray-100">
+
+<h1 class="text-2xl font-bold mb-4">🛒 Tu Carrito</h1>
+
+<table class="w-full bg-white shadow rounded-lg" id="tabla-carrito"></table>
+
+<h2 class="text-xl font-bold mt-4">Total: ₡<span id="total"></span></h2>
+
+<div class="mt-4 flex gap-2">
+  <button id="vaciar" class="bg-red-600 text-white px-4 py-2 rounded">Vaciar carrito</button>
+  <a href="index.html" class="bg-gray-600 text-white px-4 py-2 rounded">Seguir comprando</a>
+</div>
+
+<script src="js/cart.js"></script>
+</body>
+</html>

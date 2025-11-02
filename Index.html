@@ -12,15 +12,26 @@
 <body>
     <header>
         <div class="logo">
-            <h1>aromaZ</h1>
+            <img src="img/logo3.jpg" class="logo-aromaz">
         </div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="#menu">Menú</a></li>
-                <li><a href="#nosotros">Nosotros</a></li>
-                <li><a href="contact.html">Contacto</a></li>
-                <li><a id="user-link" href="login.html">Registrarse/Entrar</a></li>
+        <nav class="bg-[#4e342e] text-white px-6 py-3">
+            <ul class="flex items-center gap-6">
+                <li><a href="index.html" class="hover:underline">Inicio</a></li>
+                <li><a href="#menu" class="hover:underline">Menú</a></li>
+                <li><a href="#nosotros" class="hover:underline">Nosotros</a></li>
+                <li><a href="contact.html" class="hover:underline">Contacto</a></li>
+                <li class="ml-auto">
+                <a id="user-link" href="login.html" class="hover:underline">Registrarse/Entrar</a>
+                </li>
+                <li>
+                <a href="cart.html" class="relative font-bold">
+                    🛒
+                    <span id="cart-count"
+                        class="absolute -top-2 -right-3 text-xs bg-red-600 text-white px-2 rounded-full">
+                    0
+                    </span>
+                </a>
+                </li>
             </ul>
         </nav>
     </header>
@@ -52,6 +63,8 @@
         <h2>Nuestro Menú</h2>
         <div id="menu-container" class="menu-grid"></div>
     </section>
+
+    
 
     <footer>
         <p>&copy; 2025 aromaZ | Creado por Kevin Zamora</p>

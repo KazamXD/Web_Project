@@ -1,26 +1,38 @@
 // Cargar el menú de productos desde un archivo JSON -----> products.json
 async function cargarMenu() {
-    try {
-        const respuesta = await fetch('data/products.json');
-        const productos = await respuesta.json();
+    let productos = JSON.parse(localStorage.getItem("productos"));
 
-        const contenedor = document.getElementById('menu-container');
+    // Si no hay productos en localStorage, cargar el JSON
+    if (!productos) {
+        const respuesta = await fetch("data/products.json");
+        productos = await respuesta.json();
 
-        productos.forEach(p => {
-            const card = document.createElement('div');
-            card.classList.add('producto');
-            card.innerHTML = `
-                <img src="${p.imagen}" alt="${p.nombre}">
-                <h3>${p.nombre}</h3>
-                <p>₡${p.precio}</p>
-                <button>Agregar</button>
-            `;
-            contenedor.appendChild(card);
-        });
-
-    } catch (error) {
-        console.error("Error al cargar el menú:", error);
+        // Guardarlos en localStorage para mantener sincronía
+        localStorage.setItem("productos", JSON.stringify(productos));
     }
+
+    const contenedor = document.getElementById('menu-container');
+    contenedor.innerHTML = "";
+
+    productos.forEach((p, index) => {
+        const card = document.createElement('div');
+        card.classList.add('producto');
+        card.innerHTML = `
+            <img src="${p.imagen}" alt="${p.nombre}">
+            <h3>${p.nombre}</h3>
+            <p>₡${p.precio}</p>
+            <button class="agregar-btn" data-index="${index}">Agregar</button>  
+        `;
+        contenedor.appendChild(card);
+    });
+
+    // evento para botón agregar
+    document.addEventListener("click", function(e) {
+      if (e.target.classList.contains("agregar-btn")) {
+          const index = e.target.dataset.index;
+          agregarAlCarrito(productos[index]);
+      }
+});
 }
 
 cargarMenu();
@@ -66,4 +78,31 @@ if (userLink) {
     userLink.textContent = "Registrarse/Entrar";
     userLink.href = "login.html";
   }
+}
+
+//Contador del carrito en el icono
+function actualizarContadorCarrito() {
+    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    const totalItems = carrito.reduce((sum, p) => sum + p.cantidad, 0);
+    const countEl = document.getElementById("cart-count");
+    if (countEl) countEl.textContent = totalItems;
+}
+actualizarContadorCarrito();
+
+//Agregar al carrito
+function agregarAlCarrito(producto) {
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+    // Buscar si ya existe para sumar cantidad
+    const existe = carrito.find(p => p.nombre === producto.nombre);
+    if (existe) {
+        existe.cantidad++;
+    } else {
+        producto.cantidad = 1;
+        carrito.push(producto);
+    }
+
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    actualizarContadorCarrito();
+    alert(`${producto.nombre} agregado al carrito`);
 }
