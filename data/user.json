@@ -1,14 +1,14 @@
 [
   {
-    "nombre": "Kevin",
+    "nombre": "Andrés",
     "apellido": "Zamora",
     "usuario": "KazamXD",
     "password": "cafe2025",
-    "correo": "kevin@example.com",
+    "correo": "kzamora@gmail.com",
     "rol": "admin"
   },
   {
-    "nombre": "Rogal Dorn",
+    "nombre": "Rogal",
     "apellido": "Dorn",
     "correo": "dorn@gmail.com",
     "usuario": "Dorn",

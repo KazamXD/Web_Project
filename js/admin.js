@@ -1,4 +1,5 @@
 const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
+const SERVER_URL = "http://localhost:3000";
 
 // Si no hay usuario guardado, redirigir al login
 if (!usuario) {
@@ -47,3 +48,62 @@ document.getElementById("logout").addEventListener("click", () => {
   localStorage.removeItem("usuarioActivo");
   window.location.href = "index.html";
 });
+
+//Cargar lista de usuarios
+async function cargarUsuarios() {
+  try {
+    const res = await fetch(`${SERVER_URL}/usuarios`);
+    const usuarios = await res.json();
+
+    const tbody = document.querySelector("#tablaUsuarios tbody");
+    tbody.innerHTML = "";
+
+    usuarios.forEach(u => {
+      const row = document.createElement("tr");
+
+      row.innerHTML = `
+        <td>${u.usuario}</td>
+        <td>${u.nombre ?? "-"}</td>
+        <td>${u.apellido ?? "-"}</td>
+        <td>${u.correo ?? "-"}</td>
+        <td>${u.rol}</td>
+        <td>
+          <button onclick="location.href='updateUser.html?usuario=${u.usuario}'">Editar</button>
+          <button onclick="eliminarUsuario('${u.usuario}')">Eliminar</button>
+        </td>
+      `;
+
+      tbody.appendChild(row);
+    });
+
+  } catch (err) {
+    console.error("Error cargando usuarios:", err);
+  }
+}
+
+cargarUsuarios();
+
+// Función para eliminar usuario
+async function eliminarUsuario(usuario) {
+  const confirmar = confirm(`¿Eliminar usuario ${usuario}?`);
+
+  if (!confirmar) return;
+
+  try {
+    const res = await fetch(`${SERVER_URL}/usuarios`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ usuario })
+    });
+
+    if (!res.ok) throw new Error("Error eliminando usuario");
+
+    alert("Usuario eliminado");
+    cargarUsuarios();
+
+  } catch (err) {
+    console.error(err);
+    alert("No se pudo eliminar el usuario");
+  }
+}
+

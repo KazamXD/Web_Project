@@ -16,9 +16,17 @@ app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 // ---- Rutas ----
 
 // Obtener todos los usuarios
-app.get("/usuarios", (req, res) => {
-  const data = fs.readFileSync("./user.json", "utf8");
-  res.json(JSON.parse(data));
+app.get("/usuarios/:usuario", (req, res) => {
+  const usuarioId = req.params.usuario;
+  const data = JSON.parse(fs.readFileSync("./user.json", "utf8"));
+
+  const usuario = data.find(u => u.usuario === usuarioId);
+
+  if (!usuario) {
+    return res.status(404).json({ mensaje: "Usuario no encontrado" });
+  }
+
+  res.json(usuario);
 });
 
 // Registrar nuevo usuario
@@ -55,27 +63,31 @@ app.get("/estadisticas", (req, res) => {
 });
 
 // Actualizar usuario
-app.put("/usuarios", (req, res) => {
+// Actualizar usuario
+app.put("/usuarios/:usuario", (req, res) => {
   try {
-    console.log("PUT recibido:", req.body);
-    const { usuario, nombre, correo } = req.body;
+    const usuarioId = req.params.usuario;
+    const nuevosDatos = req.body;
 
     const usuarios = JSON.parse(fs.readFileSync("./user.json", "utf8"));
-    const index = usuarios.findIndex(u => u.usuario === usuario);
-    if (index === -1) return res.status(404).json({ msg: "Usuario no encontrado" });
+    const index = usuarios.findIndex(u => u.usuario === usuarioId);
 
-    usuarios[index].nombre = nombre;
-    usuarios[index].correo = correo;
+    if (index === -1) {
+      return res.status(404).json({ mensaje: "Usuario no encontrado" });
+    }
+
+    // Mezclar datos anteriores con nuevos
+    usuarios[index] = { ...usuarios[index], ...nuevosDatos };
 
     fs.writeFileSync("./user.json", JSON.stringify(usuarios, null, 2));
-    console.log("Usuario actualizado:", usuarios[index]);
 
-    res.json({ msg: "Usuario actualizado" });
+    res.json({ mensaje: "Usuario actualizado con éxito" });
   } catch (e) {
-    console.error("Error en PUT /usuarios:", e);
+    console.error("Error en PUT /usuarios/:usuario:", e);
     res.status(500).send("Error interno al actualizar usuario");
   }
 });
+
 
 // Archivos estáticos (si los necesitas)
 app.use(express.static(__dirname));

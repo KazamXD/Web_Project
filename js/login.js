@@ -1,8 +1,3 @@
-// Usuarios simulados
-const usuarios = [
-  { usuario: "admin", password: "1234" },
-  { usuario: "kevin", password: "cafe2025" }
-];
 
 // Alternar entre registro y login
 const formRegistro = document.getElementById("formRegistro");
@@ -54,31 +49,16 @@ if (registroForm) {
       const data = await res.json();
       alert(data.mensaje);
 
-      localStorage.setItem("usuarioActivo", nuevoUsuario.usuario);
+      localStorage.setItem("usuarioActivo", JSON.stringify({
+        ...nuevoUsuario,
+        rol: "cliente"
+      }));
       e.target.reset();
       window.location.href = "http://127.0.0.1:5500/Web_Project/index.html";
     } catch (err) {
       alert(err.message);
     }
   });
-}
-//probar guardar usuarios
-// Al registrar un nuevo usuario
-function registrarUsuario(nuevoUsuario) {
-  // Traer la lista de usuarios existente o crear una vacía
-  const usuarios = JSON.parse(localStorage.getItem("user")) || [];
-
-  // Chequear si el usuario ya existe
-  const existe = usuarios.some(u => u.usuario === nuevoUsuario.usuario);
-  if (existe) {
-    alert("El usuario ya existe");
-    return false;
-  }
-
-  // Agregar usuario nuevo y guardar
-  usuarios.push(nuevoUsuario);
-  localStorage.setItem("user", JSON.stringify(usuarios));
-  return true;
 }
 
 

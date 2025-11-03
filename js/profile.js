@@ -1,22 +1,26 @@
 // Validación de sesión
-const user = JSON.parse(localStorage.getItem("usuarioActivo"));
+const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
 
-if (!user) {
+if (!usuario) {
   alert("Debes iniciar sesión primero");
   window.location.href = "login.html";
-} else if (user.rol !== "cliente") {
-  alert("Solo los clientes pueden acceder a su perfil");
+}
+// Si el usuario es admin, enviarlo al panel admin
+else if (usuario.rol === "admin") {
+  window.location.href = "admin.html";
+}
+// Si no es cliente, bloquear
+else if (usuario.rol !== "cliente") {
+  alert("Acceso no autorizado");
   window.location.href = "index.html";
 }
-
-console.log("usuarioActivo:", localStorage.getItem("usuarioActivo"));
-console.log("user obj:", user);
+console.log("usuarioActivo:", usuario);
 
 // URL de tu servidor Node
 const SERVER_URL = "http://localhost:3000";
 
 // Elementos del DOM
-const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
+
 const perfil = document.getElementById("perfil-contenido");
 const sinSesion = document.getElementById("sin-sesion");
 
