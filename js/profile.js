@@ -85,11 +85,11 @@ saveBtn.addEventListener("click", async () => {
   const { avatar, ...sinAvatar } = dataActualizada;
 
   try {
-    const res = await fetch(`${SERVER_URL}/usuarios`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(sinAvatar)
-    });
+    const res = await fetch(`${SERVER_URL}/usuarios/${usuario.usuario}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(sinAvatar)
+  });
 
     if (!res.ok) {
       const text = await res.text(); // ver mensaje real

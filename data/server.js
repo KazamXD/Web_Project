@@ -29,6 +29,16 @@ app.get("/usuarios/:usuario", (req, res) => {
   res.json(usuario);
 });
 
+// Obtener todos los usuarios (NECESARIO PARA LOGIN)
+app.get("/usuarios", (req, res) => {
+  try {
+    const data = JSON.parse(fs.readFileSync("./user.json", "utf8"));
+    res.json(data);
+  } catch (e) {
+    res.status(500).json({ mensaje: "Error al leer usuarios" });
+  }
+});
+
 // Registrar nuevo usuario
 app.post("/usuarios", (req, res) => {
   const nuevoUsuario = req.body;

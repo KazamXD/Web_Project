@@ -1,13 +1,13 @@
 {
   "ventas": [
-    { "producto": "Capuchino", "ingresos": 1200 },
+    { "producto": "Capuchino", "ingresos": 12000 },
     { "producto": "Latte", "ingresos": 950 },
     { "producto": "Moka", "ingresos": 780 },
     { "producto": "Cold Brew", "ingresos": 420 }
   ],
   "clientes": {
-    "total": 97,
-    "promedioPorDia": 19,
-    "masFrecuente": "Kevin"
+    "total": 98,
+    "promedioPorDia": 31,
+    "masFrecuente": "Andrés"
   }
 }

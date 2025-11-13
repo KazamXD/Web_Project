@@ -35,7 +35,8 @@ if (registroForm) {
       apellido: inputs[1].value,
       correo: inputs[2].value,
       usuario: inputs[3].value,
-      password: inputs[4].value
+      password: inputs[4].value,
+      rol: "cliente"
     };
 
     try {
@@ -54,7 +55,7 @@ if (registroForm) {
         rol: "cliente"
       }));
       e.target.reset();
-      window.location.href = "http://127.0.0.1:5500/Web_Project/index.html";
+      window.location.href = "http://127.0.0.1:5500/index.html";
     } catch (err) {
       alert(err.message);
     }
